@@ -7,6 +7,9 @@ const Role = {
 
     // default, for live audience
     SUBSCRIBER: 2,
+
+    // audio only publisher
+    AUDIO_ONLY_PUBLISHER: 3,
 }
 
 class RtcTokenBuilder {
@@ -57,6 +60,9 @@ class RtcTokenBuilder {
         if (role == Role.PUBLISHER) {
             serviceRtc.add_privilege(ServiceRtc.kPrivilegePublishAudioStream, privilege_expire)
             serviceRtc.add_privilege(ServiceRtc.kPrivilegePublishVideoStream, privilege_expire)
+            serviceRtc.add_privilege(ServiceRtc.kPrivilegePublishDataStream, privilege_expire)
+        } else if (role == Role.AUDIO_ONLY_PUBLISHER) {
+            serviceRtc.add_privilege(ServiceRtc.kPrivilegePublishAudioStream, privilege_expire)
             serviceRtc.add_privilege(ServiceRtc.kPrivilegePublishDataStream, privilege_expire)
         }
         token.add_service(serviceRtc)
